@@ -1,0 +1,195 @@
+/* ============================================
+   BOOKING SYSTEM - CUSTOM STYLES
+   ============================================
+   Projekt:      Buchungssystem Styling & UX-Verbesserungen
+   Autor:        Benjamin Popken
+   Erstellt:     14.03.2026
+   Letzte Änderung: 24.03.2026
+   Version:      minimal-kostenlose-version-1.0.0
+   Beschreibung:
+   Minimale kostenlose Basis-Version mit dynamischen
+   Hinweisen, zweisprachiger Unterstützung (DE/EN) und
+   optimiertem Kalender-Design. Ideal als Einstiegspaket
+   für Kunden, die ihr Buchungssystem mit Custom-Styling
+   erweitern möchten.
+   
+   FEATURES (kostenlos):
+   ✓ Dynamische Hinweise (Kalender)
+   ✓ Zweisprachig (Deutsch/Englisch)
+   ✓ Schrift Fett
+   ✓ Zeilenumbrüche abbilden
+   ✓ Gästeanfrage bearbeitet
+
+   v1.1.0 (24.03.2026):
+   - Gästedaten abfrage angepasst
+
+   v1.0.0 (24.03.2026):
+   - Release: Minimale kostenlose Version
+   - Basis-Features implementiert
+   - Zweisprachig (DE/EN)
+   - CSS-Variablen für einfache Anpassung
+
+   Unterstützte Software-Versionen:
+   - Ab PAP 1.39
+
+   LIZENZ:
+   - Kostenlos für Einzelnutzer
+   - Premium-Upgrade verfügbar mit erweiterten Features
+
+   KONTAKT / SUPPORT:
+   b.popken@emvion.de
+   ============================================ */
+
+
+:root {
+  --secondary: rgba(46, 204, 113, 1);
+  --accent: rgba(255, 215, 0, 1);        /* Gold - Entspricht --diac-clr-focus: #FFD700 (beibehalten) */
+  --text: rgba(60, 60, 60, 1);            /* Dunkelgrau - Schätzung für gute Lesbarkeit (beibehalten) */
+ 
+  --hint-calendar: block;           /* Kalender-Hinweise: block = AN | none = AUS */
+   
+}
+
+/* ============================================
+   GLOBAL - Texte & Layout
+   ============================================ */
+div div small,
+span.css-138pa46 {
+  font-weight: bold;
+  white-space: pre-line;
+}
+
+label.form-label {
+  font-weight: bold;
+}
+
+div.modal-body {
+  font-weight: bold;
+}
+
+div div p {
+  font-weight: bold;
+}
+
+/* ============================================
+   DYNAMISCHE HINWEISE - Kalender-Seite
+   ============================================ */
+
+/* ENGLISCH - Kalender Hinweis (Standard) */
+div.Booking-Process-Stay-Step-View.css-vexvq5 h6::after,
+div.css-18ofpb6 h6::after {
+  content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0Select start and end date!";
+  display: var(--hint-calendar);
+  background-color: rgba(241, 196, 15, 0.1);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  padding: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+/* DEUTSCH - Kalender Hinweis */
+body:has(img[src*="flag_english"]) div.Booking-Process-Stay-Step-View.css-vexvq5 h6::after,
+body:has(img[src*="flag_english"]) div.css-18ofpb6 h6::after {
+  content: "\00a0\00a0\00a0\00a0\00a0Start- und Endzeitpunkt auswählen! ";
+}
+
+/* ENGLISCH - Kalender Hinweis (erfolgreich) */
+body:has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled)) div.Booking-Process-Stay-Step-View.css-vexvq5 h6::after,
+body:has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled)) div.css-18ofpb6 h6::after {
+  content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0 Confirm with Next";
+  background-color: rgba(46, 204, 113, 0.1);
+  color: #2e7d32;
+  border-color: var(--secondary);
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* DEUTSCH - Kalender Hinweis (erfolgreich) */
+body:has(img[src*="flag_english"]):has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled)) div.Booking-Process-Stay-Step-View.css-vexvq5 h6::after,
+body:has(img[src*="flag_english"]):has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled)) div.css-18ofpb6 h6::after {
+  content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0Mit Weiter bestätigen";
+}
+/* Hagemann */
+div.css-1vs9mui {
+  transform: translateY(-12px);  /* nach oben */
+}
+
+/* ============================================
+   Gästedatenabfrage angepasst (responsive)
+   ============================================ */
+
+/* --- MENGE- und LAND-Block gleich breit --- */
+div.css-1k9moce.input-group.input-group-lg,
+div.css-k2ie35.mb-3 {
+  max-width: clamp(100%, 90vw, 700px);
+  width: 100%;
+}
+
+/* --- Input im MENGE-Block --- */
+div.css-1k9moce.input-group.input-group-lg input.css-1rhavk4.form-control {
+  padding: clamp(10px, 2vw, 18px) clamp(12px, 2vw, 20px);
+  font-size: clamp(14px, 2.2vw, 1.19em);
+  min-height: clamp(44px, 6vw, 60px);
+  border-radius: 0px;
+  border-color: #999999;
+}
+
+/* --- +/- Buttons --- */
+div.css-1k9moce.input-group.input-group-lg span.css-d5w927.input-group-text {
+  padding: clamp(10px, 2vw, 18px) clamp(12px, 2vw, 22px);
+  font-size: clamp(14px, 2.2vw, 1.19em);
+  min-height: clamp(44px, 6vw, 60px);
+  background-color: #e9ecef;
+  border-color: #999999;
+  border-radius: 8px;
+}
+
+/* Ränder der +/- Buttons */
+div.css-1k9moce.input-group.input-group-lg span.css-d5w927.input-group-text:first-of-type {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+div.css-1k9moce.input-group.input-group-lg span.css-d5w927.input-group-text:last-of-type {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* --- LAND Select --- */
+div.css-k2ie35.mb-3 select.form-select {
+  width: 100%;
+  padding: clamp(10px, 2vw, 18px) clamp(12px, 2vw, 20px);
+  font-size: clamp(14px, 2.2vw, 1.19em);
+  min-height: clamp(44px, 6vw, 60px);
+  border-radius: 8px;
+  border-color: #999999;
+  background-color: #fff;
+  color: #495057;
+  appearance: none;
+}
+
+/* Hover & Focus */
+div.css-k2ie35.mb-3 select.form-select:hover {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 clamp(0.1rem, 0.2vw, 0.2rem) rgba(0, 123, 255, .25);
+}
+
+div.css-k2ie35.mb-3 select.form-select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 clamp(0.1rem, 0.2vw, 0.2rem) rgba(0, 123, 255, .25);
+  outline: 0;
+}
+
+span.css-ymusd3 {
+  font-weight: bold;
+}
+
+
+
