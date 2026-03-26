@@ -1,0 +1,137 @@
+/* ============================================
+   HINWEISTEXT 1 - PIN Information (wo man ihn findet)
+   ============================================ */
+
+/* Ausblenden in span.css-138pa46 */
+span.css-138pa46::after,
+span.css-138pa46::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Ausblenden in div div span */
+div div span::after,
+div div span::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Ausblenden in div.css-1rxuneb */
+div.css-1rxuneb::after,
+div.css-1rxuneb::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* ENGLISCH - PIN Info Hinweis - NUR auf Startseite (wenn hr vorhanden) */
+body:has(hr) div.css-1udxy2l:first-of-type::after {
+  content: "PIN for sanitary facilities available in ticket information after booking" !important;
+  display: inline-block !important;
+  
+  /* DESIGN - WIE ANDERE HINWEISE */
+  background-color: rgba(52, 152, 219, 0.1) !important;
+  color: var(--text) !important;
+  border: 2px solid #3498db !important;
+  padding: 10px 15px !important;
+  margin: 15px auto !important;
+  font-size: clamp(14px, 2.2vw, 18px) !important;
+  border-radius: 15px !important;
+  font-weight: bold !important;
+  box-sizing: border-box !important;
+  white-space: normal !important;
+  line-height: 1.4 !important;
+  animation: fadeIn 0.5s ease-in !important;
+  text-align: center !important;
+  
+  /* RESPONSIVE BREITE - KOMPAKT UND ZENTRIERT */
+  width: auto !important;
+  max-width: 90% !important;
+  
+  /* POSITION - PERFEKT ZENTRIERT */
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 100 !important;
+}
+
+/* DEUTSCH - Wenn flag_english sichtbar ist */
+body:has(img[src*="flag_english"]):has(hr) div.css-1udxy2l:first-of-type::after {
+  content: "PIN für Sanitäranlagen nach Buchung in den Ticketinformationen verfügbar" !important;
+}
+
+
+/* ============================================
+   HINWEISTEXT 2 - PIN Anzeige (#bza UND Online)
+   ============================================ */
+
+/* STANDARD - Ausblenden (alte Position in Tabelle) */
+thead tr th:first-child::after {
+  display: none !important;
+}
+
+/* FÜR #bza - NUR mit BESTIMMTEN Elementen */
+div.css-1ma32jq:has(h6):has(thead tr th):has(p):not(:has(input.form-control)):not(:has(tfoot tr td))::after {
+  content: "The PIN for the sanitary facilities is: 7834" !important;
+  display: block !important;
+  
+  /* POSITION */
+  position: relative !important;
+  width: 100% !important;
+  margin: 30px 0 30px 0 !important;
+  
+  /* DESIGN - WIE HINWEIS 1 */
+  background-color: rgba(52, 152, 219, 0.1) !important;
+  color: var(--text) !important;
+  border: 2px solid #3498db !important;
+  padding: 15px 20px !important;
+  font-size: clamp(18px, 3vw, 24px) !important;
+  border-radius: 20px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  line-height: 1.5 !important;
+  animation: fadeIn 0.5s ease-in !important;
+  z-index: 100 !important;
+}
+
+/* DEUTSCH - #bza */
+body:has(img[src*="flag_english"]) div.css-1ma32jq:has(h6):has(thead tr th):has(p):not(:has(input.form-control)):not(:has(tfoot tr td))::after {
+  content: "Der PIN für die Sanitären Anlagen lautet: 7834" !important;
+}
+
+/* FÜR ONLINE - NUR wenn div.css-h5ocr1 vorhanden */
+body:has(div.css-h5ocr1) div.Footer.css-qf6rh9::before {
+  content: "The PIN for the sanitary facilities is: 7834" !important;
+  display: block !important;
+  
+  /* POSITION */
+  position: relative !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 30px auto 20px auto !important;
+  
+  /* DESIGN - GLEICH WIE HINWEIS 1 */
+  background-color: rgba(52, 152, 219, 0.1) !important;
+  color: var(--text) !important;
+  border: 2px solid #3498db !important;
+  padding: 15px 20px !important;
+  font-size: clamp(18px, 3vw, 24px) !important;
+  border-radius: 20px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  line-height: 1.5 !important;
+  animation: fadeIn 0.5s ease-in !important;
+  z-index: 100 !important;
+}
+
+/* DEUTSCH - Online */
+body:has(img[src*="flag_english"]):has(div.css-h5ocr1) div.Footer.css-qf6rh9::before {
+  content: "Der PIN für die Sanitären Anlagen lautet: 7834" !important;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
