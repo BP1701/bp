@@ -1,0 +1,884 @@
+/* ================================================
+   BOOKING SYSTEM - CUSTOM STYLES Premium Version
+   ================================================
+   Projekt:      Buchungssystem Styling & UX-Verbesserungen
+   Autor:        Benjamin Popken
+   Erstellt:     14.03.2026
+   Letzte Änderung: 25.03.2026
+   Version:      1.8.0
+   Beschreibung:
+   Custom CSS für das Buchungssystem mit dynamischen
+   Hinweisen, zweisprachiger Unterstützung (DE/EN) und
+   optimiertem Kalender-Design.
+
+   v1.8.0:
+   - Gästedatenabfrage angepasst
+
+   v1.7.1:
+   - Kennzeichen-Eingabefeld angepasst Styling und Schriftart
+   
+   v1.7.0:
+   - Kennzeichen-Eingabefeld angepasst
+
+   v1.6.1:
+   - Fix: "Weiter"-Button
+   - Fix: "Hover-Effekt"
+   
+   v1.6.0:
+   - Hinweis für Artikel ohne Pflicht-Artikel
+   - Struktur vereinfacht (Block 1 = Einzelauswahl/Hinweis, Block 3 = Keine Pflicht)
+   
+   v1.5.0:
+   - Dynamischer Hinweis für BZA-Preis-Seite
+   - Dynamischer Hinweis für Gästedaten-Abfrage
+   - Code-Struktur vereinheitlicht
+   
+   v1.4.1:
+   - Roter Hinweis für belegte Tage im Kalender
+   - Hinweis für belegte Tage wahlweise ein-/ausschaltbar
+   - Kürzere, prägnantere Texte
+   
+   v1.3.1:
+   - Belegte/gesperrte Tage dezent ausgegraut (opacity 0.5)
+   - Einheitliches Styling für alle disabled-Tage
+   - Verbesserte UX mit not-allowed Cursor
+   
+   v1.3.0:
+   - Mengeneingabe-Artikel Support (z.B. kWh-Eingabe)
+   - Unterscheidung zwischen Einzelauswahl und Mengeneingabe
+   - Kalenderwochennummer: Modern & transparent gestylt
+   
+   Unterstützte Software-Versionen:
+   - Ab PAP 1.39
+
+   KONTAKT / SUPPORT:
+   b.popken@emvion.de
+   ============================================ */
+
+:root {
+  --primary: rgba(88, 28, 135, 1);       /* Dunkles Lila - Hauptfarbe */
+  --primary-hover: rgba(106, 27, 154, 1); /* Helleres Lila für Hover */
+  --secondary: rgba(46, 204, 113, 1);     /* Frisches Grün - Erfolg/Weiter */
+  --accent: rgba(241, 196, 15, 1);        /* Warmes Gold - Highlights */
+  --background: rgba(248, 249, 250, 1);   /* Helles Grau - Hintergrund */
+  --text: rgba(44, 62, 80, 1);            /* Dunkelgrau - Text */
+  --white: rgba(255, 255, 255, 1);        /* Weiß */ 
+  --error: rgba(211, 47, 47, 1);          /* Rot - Fehler/Belegt */
+
+  /* ========================================
+     HINWEISE AN/AUS - Einfach auf "none" setzen zum Deaktivieren
+     ======================================== */
+  --hint-willkommen: block;   /* Begrüßung anpassung: block = AN | none = AUS */
+  --hint-calendar: block;           /* Kalender-Hinweise: block = AN | none = AUS */
+  --hint-stay-article: block;       /* Übernachtungsart-Hinweise: block = AN | none = AUS */
+  --hint-articles: block;           /* Artikel-Hinweise (Strom/Wasser): block = AN | none = AUS */
+  --hint-booked-calendar: none;    /* Belegte Tage-Hinweis: block = AN | none = AUS  */
+  --hint-license-plate: block;    /* Kennzeichen-Hinweis: block = AN | none = AUS */
+  --hint-bza-stay-article: none; /* BZA Preis-Seite: block = AN | none = AUS */
+  --hint-guest-data: block;    /* Gästedaten-Seite: block = AN | none = AUS */
+  --hint-none-pflicht: none;   /* wenn keine Pflichartikel: block = AN | none = AUS */
+  
+}
+
+/* ============================================
+   BEGRÜSSUNGSTEXT - Mehrsprachig
+   ============================================ */
+span.css-33f9uu {
+  font-size: 0;
+}
+
+/* ENGLISCH (Standard) */
+span.css-33f9uu::after {
+  content: "➤ Welcome!";
+  font-size: clamp(16px, 2.5vw, 20px);
+  display: var(--hint-willkommen);
+  text-align: left;
+  color: var(--white);
+}
+
+/* DEUTSCH - wenn englische Flagge angezeigt wird */
+body:has(img[src*="flag_english"]) span.css-33f9uu::after {
+  content: "➤ Herzlich Willkommen!";
+}
+
+/* ============================================
+   GLOBAL - Texte & Layout
+   ============================================ */
+div div small,
+span.css-138pa46 {
+  font-weight: bold;
+  white-space: pre-line;
+}
+
+label.form-label {
+  font-weight: bold;
+}
+
+div.modal-body {
+  font-weight: bold;
+}
+/* Neu Parkzeitsanzeige */
+div div p {
+  font-weight: bold;
+}
+
+/* Header/Container */
+div.css-5l8gbz {
+  background-color: var(--primary);
+}
+
+/* Elemente ausblenden */
+div.css-16hh21u,
+div.css-1antsuh {
+  display: none;
+}
+
+/* Hintergrund-Elemente BZA!! */
+div.css-1dk11a5,
+div.css-1t3o2fz {
+  background-color: var(--primary);
+}
+
+span.css-1sqa4gt.css-d5w927.input-group-text {
+  background-color: var(--primary-hover);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+/* Primary Buttons - allgemein */
+button.css-wwiaj0.btn.btn-primary.btn-lg,
+button.css-wwiaj0.btn.btn-primary {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+button.css-wwiaj0.btn.btn-primary:hover {
+  background-color: var(--primary);
+}
+
+/* Großer Primary Button (Weiter-Button) - IMMER volle Farbe */
+button.css-wwiaj0.btn.btn-primary.btn-lg.d-block.w-100 {
+  background-color: var(--primary) !important;
+  color: var(--white) !important;
+}
+
+button.css-wwiaj0.btn.btn-primary.btn-lg.d-block.w-100:hover {
+  background-color: var(--primary) !important;
+  opacity: 0.95;
+}
+
+button.css-wwiaj0.btn.btn-primary.btn-lg.d-block.w-100:focus {
+  background-color: var(--primary) !important;
+}
+
+button.css-wwiaj0.btn.btn-primary.btn-lg.d-block.w-100:active {
+  background-color: var(--primary) !important;
+}
+
+/* DISABLED - deutlich erkennbar */
+button.css-wwiaj0.btn.btn-primary.btn-lg.d-block.w-100:disabled {
+  background-color: var(--primary) !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  color: var(--white) !important;
+}
+
+/* Outline Primary Buttons */
+button.css-wwiaj0.btn.btn-outline-primary.btn-lg.d-block.w-100,
+button.css-wwiaj0.btn.btn-outline-primary.btn-lg,
+button.css-wwiaj0.btn.btn-outline-primary {
+  background-color: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+/* Spezielle Outline-Variante */
+button.css-wwiaj0.btn.btn-outline-primary {
+  background-color: var(--primary);
+}
+
+/* Secondary Button */
+button.css-wwiaj0.btn.btn-secondary.btn-lg {
+  background-color: var(--accent);
+  color: black;
+}
+
+/* Light Button */
+button.css-wwiaj0.btn.btn-light.btn-lg {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+
+
+/* ============================================
+   REACT DATEPICKER - Kalender
+   ============================================ */
+div.react-datepicker {
+  font-family: inherit;
+  border-color: var(--primary) !important;
+}
+
+/* Header */
+.react-datepicker__header {
+  background-color: var(--primary) !important;
+  border-bottom: none;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: var(--white) !important;
+}
+
+/* Navigation Pfeile */
+.react-datepicker__navigation {
+  top: 10px;
+}
+
+.react-datepicker__navigation:hover *::before {
+  border-color: var(--accent) !important;
+}
+
+/* Start-Datum */
+.react-datepicker__day--range-start {
+  background-color: var(--primary) !important;
+  color: var(--white) !important;
+  font-weight: bold !important;
+  border: 3px solid var(--accent) !important;
+  border-radius: 50% 0 0 50% !important;
+}
+
+/* End-Datum */
+.react-datepicker__day--range-end {
+  background-color: var(--primary) !important;
+  color: var(--white) !important;
+  font-weight: bold !important;
+  border: 3px solid var(--accent) !important;
+  border-radius: 0 50% 50% 0 !important;
+}
+
+/* Start und Ende am selben Tag */
+.react-datepicker__day--range-start.react-datepicker__day--range-end {
+  border-radius: 50% !important;
+}
+
+/* Tage zwischen Start und Ende */
+.react-datepicker__day--in-range:not(.react-datepicker__day--range-start):not(.react-datepicker__day--range-end) {
+  background-color: rgba(88, 28, 135, 0.2) !important;
+  color: var(--text) !important;
+  border-top: 3px solid var(--accent) !important;
+  border-bottom: 3px solid var(--accent) !important;
+  border-radius: 0 !important;
+  font-weight: bold;
+}
+
+/* Während der Auswahl (Vorschau) */
+.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--range-start):not(.react-datepicker__day--range-end) {
+  background-color: rgba(88, 28, 135, 0.15) !important;
+  border-radius: 0 !important;
+}
+
+/* Heute markieren */
+.react-datepicker__day--today:not(.react-datepicker__day--range-start):not(.react-datepicker__day--range-end) {
+  border: 3px solid var(--accent) !important;
+  font-weight: bold;
+}
+
+/* Ausgewählte Tage */
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: var(--primary) !important;
+}
+
+/* Hover-Effekte */
+.react-datepicker__day--range-start:hover,
+.react-datepicker__day--range-end:hover,
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--keyboard-selected:hover {
+  background-color: var(--primary-hover) !important;
+}
+
+/* Kalenderwochennummer - modern & transparent */
+div.react-datepicker__week-number,
+div.react-datepicker__week-number.react-datepicker__week-number--selected {
+  background-color: rgba(0, 0, 0, 0.06) !important;  /* Sehr dezent */
+  color: rgba(44, 62, 80, 0.4) !important;            /* Transparent grau */
+  font-weight: 600 !important;                        /* Semi-bold */
+  border-radius: 4px !important;                      /* Leicht abgerundet */
+  font-size: 11px !important;                         /* Etwas kleiner */
+}
+
+/* ============================================
+   DYNAMISCHE HINWEISE - Kalender-Seite
+   ============================================ */
+
+/* ENGLISCH - Kalender Hinweis (Standard) */
+div.Booking-Process-Stay-Step-View.css-vexvq5 h6::after,
+div.css-18ofpb6 h6::after {
+  content: "💡 Select start and end date!";
+  display: var(--hint-calendar);
+  background-color: rgba(241, 196, 15, 0.1);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  padding: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+/* DEUTSCH - Kalender Hinweis */
+body:has(img[src*="flag_english"]) div.Booking-Process-Stay-Step-View.css-vexvq5 h6::after,
+body:has(img[src*="flag_english"]) div.css-18ofpb6 h6::after {
+  content: "💡 Start- und Endzeitpunkt auswählen!";
+}
+
+/* ENGLISCH - Kalender Hinweis (erfolgreich) */
+body:has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled)) div.Booking-Process-Stay-Step-View.css-vexvq5 h6::after,
+body:has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled)) div.css-18ofpb6 h6::after {
+  content: "✅ Confirm with Next";
+  background-color: rgba(46, 204, 113, 0.1);
+  color: #2e7d32;
+  border-color: var(--secondary);
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* DEUTSCH - Kalender Hinweis (erfolgreich) */
+body:has(img[src*="flag_english"]):has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled)) div.Booking-Process-Stay-Step-View.css-vexvq5 h6::after,
+body:has(img[src*="flag_english"]):has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled)) div.css-18ofpb6 h6::after {
+  content: "✅ Mit Weiter bestätigen";
+}
+
+/* ENGLISCH - Kalender Hinweis (Bereits belegt) */
+body:has(.react-datepicker__day--in-range):has(button.css-wwiaj0:disabled) div.Booking-Process-Stay-Step-View.css-vexvq5 h6::after,
+body:has(.react-datepicker__day--in-range):has(button.css-wwiaj0:disabled) div.css-18ofpb6 h6::after {
+  content: "⚠️ Period already booked";
+  background-color: #ffebee;
+  color: #d32f2f;
+  border-color: #d32f2f;
+  animation: fadeIn 0.7s ease-in;
+}
+
+/* DEUTSCH - Kalender Hinweis (Bereits belegt) */
+body:has(img[src*="flag_english"]):has(.react-datepicker__day--in-range):has(button.css-wwiaj0:disabled) div.Booking-Process-Stay-Step-View.css-vexvq5 h6::after,
+body:has(img[src*="flag_english"]):has(.react-datepicker__day--in-range):has(button.css-wwiaj0:disabled) div.css-18ofpb6 h6::after {
+  content: "⚠️ Zeitraum bereits belegt";
+}
+
+/* ============================================
+   DYNAMISCHE HINWEISE - Übernachtungsart-Seite
+   ============================================ */
+
+/* ENGLISCH - Hilfestellung bei der Übernachtungpreisauswahl (erfolgreich) */
+body:has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:not(:disabled)) div.Booking-Process-Stay-Article-Step-View.css-1p39tn6 span.css-138pa46::after {
+  content: "✅ Confirm with Next";
+  display: var(--hint-stay-article);
+  background-color: rgba(46, 204, 113, 0.1);
+  color: #2e7d32;
+  border: 2px solid var(--secondary);
+  padding: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: clamp(14px, 2.2vw, 16px);
+  border-radius: 20px;
+  font-weight: bold;
+  box-sizing: border-box;
+  min-width: min(350px, 90vw);
+  max-width: 90vw;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* DEUTSCH - Hilfestellung bei der Übernachtungpreisauswahl (erfolgreich) */
+body:has(img[src*="flag_english"]):has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:not(:disabled)) div.Booking-Process-Stay-Article-Step-View.css-1p39tn6 span.css-138pa46::after {
+  content: "✅ Mit Weiter bestätigen";
+}
+
+/* ENGLISCH - Hilfestellung bei der Übernachtungpreisauswahl (Option auswählen) */
+body:has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:disabled) div.Booking-Process-Stay-Article-Step-View.css-1p39tn6 span.css-138pa46::after {
+  content: "⚠️ Please select an option";
+  display: var(--hint-stay-article);
+  background-color: rgba(241, 196, 15, 0.1);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  padding: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: clamp(14px, 2.2vw, 16px);
+  border-radius: 20px;
+  font-weight: bold;
+  box-sizing: border-box;
+  min-width: min(350px, 90vw);
+  max-width: 90vw;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* DEUTSCH - Hilfestellung bei der Übernachtungpreisauswahl (Option auswählen) */
+body:has(img[src*="flag_english"]):has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:disabled) div.Booking-Process-Stay-Article-Step-View.css-1p39tn6 span.css-138pa46::after {
+  content: "⚠️ Bitte wählen Sie eine Option aus";
+}
+
+/* ============================================
+   1.DYNAMISCHE HINWEISE - Alle Artikel-Seiten mit einzel auswahl
+   ============================================ */
+
+/* ENGLISCH - Hinweis (erfolgreich) */
+body:has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:not(:disabled)) 
+div.Booking-Process-Article-Step-View.css-smz46h span.css-138pa46::after,
+body:has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:not(:disabled)) 
+div.Booking-Process-Article-Step-View.css-1ma32jq span.css-138pa46::after {
+  content: "✅ Confirm with Next";
+  display: var(--hint-articles);
+  background-color: rgba(46, 204, 113, 0.1);
+  color: #2e7d32;
+  border: 2px solid var(--secondary);
+  padding: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: clamp(14px, 2.2vw, 16px);
+  border-radius: 20px;
+  font-weight: bold;
+  box-sizing: border-box;
+  min-width: min(350px, 90vw);
+  max-width: 90vw;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* DEUTSCH -  Hinweis (erfolgreich) */
+body:has(img[src*="flag_english"]):has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:not(:disabled)) 
+div.Booking-Process-Article-Step-View.css-smz46h span.css-138pa46::after,
+body:has(img[src*="flag_english"]):has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:not(:disabled)) 
+div.Booking-Process-Article-Step-View.css-1ma32jq span.css-138pa46::after {
+  content: "✅ Mit Weiter bestätigen";
+}
+
+/* ENGLISCH -  Hinweis (Hilfestellung) */
+body:has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:disabled) 
+div.Booking-Process-Article-Step-View.css-smz46h span.css-138pa46::after,
+body:has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:disabled) 
+div.Booking-Process-Article-Step-View.css-1ma32jq span.css-138pa46::after {
+  content: "⚠️ Select desired product";
+  display: var(--hint-articles);
+  background-color: rgba(241, 196, 15, 0.1);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  padding: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: clamp(14px, 2.2vw, 16px);
+  border-radius: 20px;
+  font-weight: bold;
+  box-sizing: border-box;
+  min-width: min(350px, 90vw);
+  max-width: 90vw;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* DEUTSCH - Hinweis (Hilfestellung) */
+body:has(img[src*="flag_english"]):has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:disabled) 
+div.Booking-Process-Article-Step-View.css-smz46h span.css-138pa46::after,
+body:has(img[src*="flag_english"]):has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:disabled) 
+div.Booking-Process-Article-Step-View.css-1ma32jq span.css-138pa46::after {
+  content: "⚠️ Wunschprodukt auswählen";
+}
+/* ============================================
+   2. SPEZIFISCH - Mengeneingabe-Artikel (überschreibt!)
+   ============================================ */
+
+/* ENGLISCH - Mengeneingabe */
+div.Booking-Process-Article-Step-View.css-smz46h:has(input[type="number"]) span.css-138pa46::after {
+  content: "💡\00a0\00a0 Enter desired amount\A\00a0\00a0\00a0\00a0\00a0\00a0\00a0 and confirm with Next" !important;
+  display: var(--hint-articles);
+  background-color: rgba(241, 196, 15, 0.1) !important;
+  color: var(--text) !important;
+  border: 2px solid var(--accent) !important;
+  padding: 10px 15px !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  font-size: clamp(14px, 2.2vw, 16px) !important;
+  border-radius: 20px !important;
+  font-weight: bold !important;
+  box-sizing: border-box !important;
+  min-width: min(350px, 90vw) !important;
+  max-width: 90vw !important;
+  white-space: pre-line !important;
+  animation: fadeIn 0.5s ease-in !important;
+  line-height: 1.4 !important;
+}
+
+/* DEUTSCH - Mengeneingabe */
+body:has(img[src*="flag_english"]) 
+div.Booking-Process-Article-Step-View.css-smz46h:has(input[type="number"]) span.css-138pa46::after {
+  content: "💡\00a0\00a0 Gewünschte Menge angeben\A\00a0\00a0\00a0\00a0\00a0\00a0\00a0 und mit Weiter bestätigen" !important;
+}
+
+/* ============================================
+   3.HINWEISE - Alle Artikel-Seiten wenn keine pflicht Artikel da sind 
+   ============================================ */
+
+/* ENGLISCH - Hinweis */
+div.Booking-Process-Article-Step-View.css-smz46h span.css-138pa46::after,
+div.Booking-Process-Article-Step-View.css-1ma32jq span.css-138pa46::after {
+  content: "1.Select desired product\A\00a0\00a0\00a0\00a0\00a0\00a0\00a0 2.confirm with Next";
+  display: var(--hint-none-pflicht);
+  background-color: rgba(241, 196, 15, 0.1);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  padding: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: clamp(14px, 2.2vw, 16px);
+  border-radius: 20px;
+  font-weight: bold;
+  box-sizing: border-box;
+  min-width: min(350px, 90vw);
+  max-width: 90vw;
+  white-space: pre-line;
+  animation: fadeIn 0.5s ease-in;
+  line-height: 1.4;
+}
+
+/* DEUTSCH - Hinweis */
+body:has(img[src*="flag_english"]) 
+div.Booking-Process-Article-Step-View.css-smz46h span.css-138pa46::after,
+body:has(img[src*="flag_english"]) 
+div.Booking-Process-Article-Step-View.css-1ma32jq span.css-138pa46::after {
+  content: "\00a0\00a0\00a0\00a0\ 1.Wunschprodukt wählen\A\00a0\00a0\00a0\00a0\00a0 2.Mit Weiter bestätigen";
+}
+
+/* ============================================
+   ABO Belegungskalender
+   ============================================ */
+
+/* ALLE belegten/gesperrten Tage */
+div.react-datepicker__day--disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+/* Roter Hinweis, wenn belegte Tage da sind (sucht nach BEIDEN möglichen Klassen) */
+body:has(div.react-datepicker__day--excluded, div.react-datepicker__day.css-zf6rvv):not(:has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled))) div.Booking-Process-Stay-Step-View.css-vexvq5 h6::before,
+body:has(div.react-datepicker__day--excluded, div.react-datepicker__day.css-zf6rvv):not(:has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled))) div.css-18ofpb6 h6::before {
+  content: "⚠️Red highlighted days are already booked" !important;
+  display: var(--hint-booked-calendar);
+  width: fit-content !important;
+  background-color: rgba(211, 47, 47, 0.1) !important;
+  color: rgba(211, 47, 47, 1) !important;
+  border: 2px solid rgba(211, 47, 47, 1) !important;
+  border-radius: 20px !important; 
+  padding: 10px 7px !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  box-sizing: border-box !important;
+  animation: fadeIn 0.5s ease-in !important;
+}
+
+/* DEUTSCH - Roter Zusatz-Hinweis */
+body:has(img[src*="flag_english"]):has(div.react-datepicker__day--excluded, div.react-datepicker__day.css-zf6rvv):not(:has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled))) div.Booking-Process-Stay-Step-View.css-vexvq5 h6::before,
+body:has(img[src*="flag_english"]):has(div.react-datepicker__day--excluded, div.react-datepicker__day.css-zf6rvv):not(:has(.react-datepicker__day--in-range):has(button.css-wwiaj0:not(:disabled))) div.css-18ofpb6 h6::before {
+  content: "⚠️ Rot hinterlegte Tage sind bereits belegt!" !important;
+}
+
+/* ============================================
+   DYNAMISCHE HINWEISE - Kennzeichen-Eingabe 
+   ============================================ */
+
+/* ENGLISCH - Hilfestellung (Button ausgegraut) */
+body:has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:disabled)
+div.Booking-Process-License-Plate-Step-View.css-1ma32jq span.css-138pa46::after { 
+  content: "💡 Please enter license plate correctly";
+  display: var(--hint-license-plate); 
+  background-color: rgba(241, 196, 15, 0.1);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  padding: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: clamp(14px, 2.2vw, 16px);
+  border-radius: 30px;
+  font-weight: bold;
+  box-sizing: border-box;
+  width: fit-content;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* DEUTSCH - Hilfestellung (Button ausgegraut) */
+body:has(img[src*="flag_english"]):has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:disabled)
+div.Booking-Process-License-Plate-Step-View.css-1ma32jq span.css-138pa46::after {
+  content: "💡 Kennzeichen bitte korrekt angeben";
+}
+
+/* ENGLISCH - Erfolgreich (Button klickbar) */
+body:has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:not(:disabled))
+div.Booking-Process-License-Plate-Step-View.css-1ma32jq span.css-138pa46::after {
+  content: "✅ Confirm with Next";
+  display: var(--hint-license-plate);
+  background-color: rgba(46, 204, 113, 0.1);
+  color: #2e7d32;
+  border: 2px solid var(--secondary);
+  padding: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: clamp(14px, 2.2vw, 16px);
+  border-radius: 30px;
+  font-weight: bold;
+  box-sizing: border-box;
+  width: fit-content;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* DEUTSCH - Erfolgreich (Button klickbar) */
+body:has(img[src*="flag_english"]):has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:not(:disabled))
+div.Booking-Process-License-Plate-Step-View.css-1ma32jq span.css-138pa46::after {
+  content: "✅ Mit Weiter bestätigen";
+}
+
+
+/* ============================================
+   FORMULARE - Kennzeichen Eingabe (Aussehen) ist immer an!!! 
+   ============================================ */
+
+/* Das eigentliche Eingabefeld */
+div.Booking-Process-License-Plate-Step-View input[type="text"].form-control {
+  border: 3px solid #000000;
+  border-radius: 6px;
+  padding: 12px 16px;
+  padding-left: 50px;
+  font-size: clamp(20px, 6vw, 30px);
+  font-weight: bold;
+  
+  /* HIER IST DIE ÄNDERUNG: 'Verdana' für maximale Klarheit und Lesbarkeit. */
+  font-family: Verdana, Geneva, sans-serif;
+  
+  letter-spacing: clamp(2px, 0.8vw, 4px);
+  text-transform: uppercase;
+  
+  width: 85%;
+  max-width: 380px;
+  display: block;
+  
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  color: #000000;
+  
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1),
+              inset 35px 0 0 0 rgba(0, 51, 153, 1);
+}
+
+
+/* ============================================
+   NEU: DYNAMISCHE HINWEISE - Gästedaten-Seite 
+   ============================================ */
+
+/* ENGLISCH - Hinweis (erfolgreich) */
+body:has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:not(:disabled)) 
+div.Booking-Process-Registration-Data-Step-View.css-1ma32jq div.Booking-Process-Step-Title.css-1r9idj8::after {
+  content: "✅ Confirm with Next";
+  display: var(--hint-guest-data);
+  background-color: rgba(46, 204, 113, 0.1);
+  color: #2e7d32;
+  border: 2px solid var(--secondary);
+  padding: 10px 15px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: clamp(14px, 2.2vw, 16px);
+  border-radius: 30px;
+  font-weight: bold;
+  box-sizing: border-box;
+  width: fit-content;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* DEUTSCH -  Hinweis (erfolgreich) */
+body:has(img[src*="flag_english"]):has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:not(:disabled)) 
+div.Booking-Process-Registration-Data-Step-View.css-1ma32jq div.Booking-Process-Step-Title.css-1r9idj8::after {
+  content: "✅ Mit Weiter bestätigen";
+}
+
+/* ENGLISCH -  Hinweis (Hilfestellung) */
+body:has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:disabled) 
+div.Booking-Process-Registration-Data-Step-View.css-1ma32jq div.Booking-Process-Step-Title.css-1r9idj8::after {
+  content: "💡 Please fill in all required fields";
+  display: var(--hint-guest-data);
+  background-color: rgba(241, 196, 15, 0.1);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  padding: 10px 15px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: clamp(14px, 2.2vw, 16px);
+  border-radius: 30px;
+  font-weight: bold;
+  box-sizing: border-box;
+  width: fit-content;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* DEUTSCH - Hinweis (Hilfestellung) */
+body:has(img[src*="flag_english"]):has(button.css-wwiaj0.btn-primary.btn-lg.d-block.w-100:disabled) 
+div.Booking-Process-Registration-Data-Step-View.css-1ma32jq div.Booking-Process-Step-Title.css-1r9idj8::after {
+  content: "💡 Bitte alle Pflichtfelder ausfüllen";
+}
+
+/* ============================================
+   ALERT / HINWEISE
+   ============================================ */
+
+/* Warning Alert - passendes Design */
+div.css-1spy3t3.alert.alert-warning.fade.show {
+  background-color: rgba(241, 196, 15, 0.1) !important;
+  border: 2px solid var(--accent) !important;
+  border-left: 2px solid var(--accent) !important;
+  color: var(--text) !important;
+  font-weight: bold !important;
+  border-radius: 20px !important;
+  padding: 15px 20px !important;
+  box-shadow: 0 2px 8px rgba(241, 196, 15, 0.15) !important;
+}
+
+div.css-1spy3t3.alert.alert-danger.fade.show {
+  background-color: rgba(220, 53, 69, 0.1) !important;
+  border: 2px solid #dc3545 !important;
+  border-left: 2px solid #dc3545 !important;
+  color: var(--text) !important;
+  font-weight: bold !important;
+  border-radius: 20px !important;
+  padding: 15px 20px !important;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.15) !important;
+}
+
+/* Icon/Emoji im Alert verstärken */
+div.css-1spy3t3.alert.alert-warning.fade.show::before {
+  content: "⚠️ " !important;
+  font-size: 1.2em !important;
+  margin-right: 8px !important;
+}
+
+div.css-1spy3t3.alert.alert-danger.fade.show::before {
+  content: "🚨 " !important;
+  font-size: 1.2em !important;
+  margin-right: 8px !important;
+}
+
+
+/* ============================================
+   FORMULARE - AGB Checkbox (Standard)
+   ============================================ */
+
+/* Standard-Checkbox */
+input.form-check-input {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Angehakte Checkbox */
+input.form-check-input:checked {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+/* Fokus-Effekt */
+input.form-check-input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 0.25rem rgba(46, 204, 113, 0.25);
+  outline: 0;
+}
+
+/* Disabled-Zustand */
+input.form-check-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+ 
+/* ============================================
+   Gästedatenabfrage angepasst (responsive)
+   ============================================ */
+
+/* --- MENGE- und LAND-Block gleich breit --- */
+div.css-1k9moce.input-group.input-group-lg,
+div.css-k2ie35.mb-3 {
+  max-width: clamp(100%, 90vw, 700px);
+  width: 100%;
+}
+
+/* --- Input im MENGE-Block --- */
+div.css-1k9moce.input-group.input-group-lg input.css-1rhavk4.form-control {
+  padding: clamp(10px, 2vw, 18px) clamp(12px, 2vw, 20px);
+  font-size: clamp(14px, 2.2vw, 1.19em);
+  min-height: clamp(44px, 6vw, 60px);
+  border-radius: 0px;
+  border-color: #999999;
+}
+
+/* --- +/- Buttons --- */
+div.css-1k9moce.input-group.input-group-lg span.css-d5w927.input-group-text {
+  padding: clamp(10px, 2vw, 18px) clamp(12px, 2vw, 22px);
+  font-size: clamp(14px, 2.2vw, 1.19em);
+  min-height: clamp(44px, 6vw, 60px);
+  background-color: #e9ecef;
+  border-color: #999999;
+  border-radius: 8px;
+}
+
+/* Ränder der +/- Buttons */
+div.css-1k9moce.input-group.input-group-lg span.css-d5w927.input-group-text:first-of-type {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+div.css-1k9moce.input-group.input-group-lg span.css-d5w927.input-group-text:last-of-type {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* --- LAND Select --- */
+div.css-k2ie35.mb-3 select.form-select {
+  width: 100%;
+  padding: clamp(10px, 2vw, 18px) clamp(12px, 2vw, 20px);
+  font-size: clamp(14px, 2.2vw, 1.19em);
+  min-height: clamp(44px, 6vw, 60px);
+  border-radius: 8px;
+  border-color: #999999;
+  background-color: #fff;
+  color: #495057;
+  appearance: none;
+}
+
+/* Hover & Focus */
+div.css-k2ie35.mb-3 select.form-select:hover {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 clamp(0.1rem, 0.2vw, 0.2rem) rgba(0, 123, 255, .25);
+}
+
+div.css-k2ie35.mb-3 select.form-select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 clamp(0.1rem, 0.2vw, 0.2rem) rgba(0, 123, 255, .25);
+  outline: 0;
+}
+
+span.css-ymusd3 {
+  font-weight: bold;
+}
+
+/* ============================================
+   ANIMATION
+   ============================================ */
+@keyframes fadeIn {
+  0%, 66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
